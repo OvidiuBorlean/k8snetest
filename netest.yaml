@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  creationTimestamp: null
+  labels:
+    app: netest
+  name: netest
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: netest
+  strategy: {}
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: netest
+    spec:
+      containers:
+      - image: nginx
+        name: nginx
+        command: ["/bin/bash"]
+        args: ["-c", "apt update && apt install netcat -y && apt install tcptraceroute -y && while true; do printf 'HTTP/1.1 200 OK SALUT' | nc -l 8888; done"]
+        resources: {}
+status: {}
